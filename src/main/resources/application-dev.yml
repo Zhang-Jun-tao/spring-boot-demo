@@ -1,0 +1,55 @@
+#druid
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://123.57.29.101:3306/yx?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: test
+    password: test3569
+    type: com.alibaba.druid.pool.DruidDataSource
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+
+#jdbc.mysql.driverClassName=com.mysql.jdbc.Driver
+#jdbc.mysql.url=jdbc:mysql://123.57.29.101:3306/yx?characterEncoding=utf8
+#jdbc.mysql.url=jdbc:mysql://123.57.29.101:3306/yx?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+#jdbc.mysql.url=jdbc:mysql://123.57.29.101:3306/yx?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8
+#jdbc.mysql.username=test
+#jdbc.mysql.password=test3569
+
+
+#properties setting
+auther:
+  name: zhangjuntao
+  phone: 18500354210
+auth:
+  email: 369090720@qq.com
+
+
+#server port
+server:
+  context-path: /statistics
+  port: 80
+
+#log config
+logging:
+  level:
+    root: INFO
+    sample.mybatis.mapper: TRACE
+    org.springframework.web.method.annotation: DEBUG
+    com.yx.statistics: DEBUG
+
+
+
+
+

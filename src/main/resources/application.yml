@@ -1,0 +1,6 @@
+#profile
+spring:
+  profiles:
+    active: dev
+
+

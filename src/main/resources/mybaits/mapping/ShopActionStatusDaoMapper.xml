@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.yx.statistics.dao.ShopActionStatusDao">
+
+    <!-- 所有列 -->
+    <sql id="Column_list">
+        id,
+        merchant_id,
+        action_code,
+        status,
+        update_time
+    </sql>
+
+    <resultMap id="ShopActionStatusMap" type="ShopActionStatus" >
+        <id  column="id" property="id" />
+        <result column="merchant_id" property="merchant_id" />
+        <result column="action_code" property="action_code" />
+        <result column="status" property="status" />
+        <result column="update_time" property="update_time" />
+    </resultMap>
+
+    <resultMap id="ConstantDictionaryMap" type="ConstantDictionary" >
+        <id  column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="type" property="type" />
+        <result column="description" property="description" />
+        <result column="relation_field_name" property="relation_field_name" />
+    </resultMap>
+
+
+    <!-- 根据ID查询数据 -->
+    <select id="getShopActionsStatusByShopIds" parameterType="java.util.List" resultMap="ShopActionStatusMap">
+        SELECT
+        <include refid="Column_list" />
+        FROM merchant_action_status
+        WHERE merchant_id in
+        <foreach collection="list" index="index" item="tag" open="(" separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
+
+
+
+    <select id="getShopIds"  resultType="java.lang.Long">
+        SELECT id from merchant WHERE register_time > #{startTime}  and register_time <![CDATA[ < ]]> #{endTime} ORDER BY register_time LIMIT #{page.offset} ,#{page.pageSize}
+    </select>
+
+    <select id="getConstantDictionarys"  resultMap="ConstantDictionaryMap">
+        SELECT * FROM constant_dictionary where type =1
+    </select>
+
+
+    <select id="getStatusCompleteCnt"  resultType="java.lang.Integer">
+        SELECT COUNT(*) from t_encourage_complete_info where is_complete = 1 and complete_time > #{startTime}  and complete_time <![CDATA[ < ]]> #{endTime}
+    </select>
+
+
+    <select id="getGiveMoneyShopCnt"  resultType="java.lang.Integer">
+        SELECT COUNT(*) from t_encourage_complete_info where is_money_give_ok = 1 and money_give_ok_time > #{startTime}  and money_give_ok_time <![CDATA[ < ]]> #{endTime}
+    </select>
+
+
+    <select id="getAllShopCnt"  resultType="java.lang.Integer">
+        SELECT COUNT(*) from merchant where register_time > #{startTime}  and register_time <![CDATA[ < ]]> #{endTime}
+    </select>
+
+
+    <select id="getPreShopActionsStatusByShopIds"  parameterType="java.util.List" resultType="java.util.HashMap">
+        SELECT a.id,register_time,brand_name,account_no,real_mobile from merchant a LEFT JOIN merchant_user b on a.id= b.merchant_id where a.id in
+        <foreach collection="list" index="index" item="tag" open="(" separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
+
+
+
+</mapper>
