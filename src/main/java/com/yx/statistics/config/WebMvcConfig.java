@@ -1,10 +1,12 @@
 package com.yx.statistics.config;
 
 import com.yx.statistics.common.ApplicationContext;
+import com.yx.statistics.common.StartProjectInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -50,43 +52,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Bean
     public String printProfile(){
     	log.error("\t\tcurrnet environment: ꧁༺"+springProfile+"༻ ꧂   \tcurrnet paltform:"+osName );
-    	log.error(getStringImg(springProfile));
+    	log.error(StartProjectInfo.getProfileString(springProfile));
     	ApplicationContext.runEnv=springProfile;
     	return springProfile;
     }
-    
-    public String getStringImg(String str){
-    	StringBuffer sb=new StringBuffer();
-    	sb.append("\n");
-    	if(str.trim().equals("text")){
-    		sb.append(" *                 *\n");
-    		sb.append("*****  **  ** ** *****\n");
-    		sb.append(" *    *  *  * *    * \n");
-    		sb.append(" *    ****   *     *\n");
-    		sb.append(" *    *     * *    *\n");
-    		sb.append(" ***   *** ** **   ***\n");
-    	}else if(str.trim().equals("dev")){
-    		sb.append("	   **               \n");
-    		sb.append("	    *               \n");
-    		sb.append("	    *               \n");
-    		sb.append("	  ***   **  ** **   \n");
-    		sb.append("	 *  *  *  *  * *    \n");
-    		sb.append("	 *  *  ****  * *    \n");
-    		sb.append("	 *  *  *      *     \n");
-    		sb.append("	  ****  ***   *     \n");
-    	}else if(str.trim().equals("prod")){
-    		sb.append("			             **\n");
-    		sb.append("			             *\n");
-    		sb.append("			             *\n");
-    		sb.append("****  ** **   **    ***\n");
-    		sb.append("*  *  **    *  *  *  *\n");
-    		sb.append("*  *  *     *  *  *  *\n");
-    		sb.append("*  *  *     *  *  *  *\n");
-    		sb.append("***  ***     **    ****\n");
-    		sb.append("*\n");
-    		sb.append("***\n");
-    	}
-    	return sb.toString();
-    }
+
+
+	@Bean
+    public RestTemplate restTemplate(){
+    	return  new RestTemplate();
+	}
+
 }
 

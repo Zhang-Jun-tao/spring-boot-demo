@@ -5,6 +5,7 @@ import com.yx.statistics.Util.DateUtil;
 import com.yx.statistics.common.Page;
 import com.yx.statistics.service.IShopStatusStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class StatisticsController {
     @Autowired
     private IShopStatusStatisticsService shopStatusStatisticsService;
 
-    @RequestMapping(value = "/shop_status_list")
+    @GetMapping(value = "/shop_status_list")
     public Map<String,Object> ShopActionStatusList(
             @RequestParam(value = "current_page",required = false)String current_page,
             @RequestParam(value = "page_size",required = false)String page_size,
@@ -51,7 +52,7 @@ public class StatisticsController {
 
 
 
-    @RequestMapping(value = "/shop_status_cnt")
+    @GetMapping(value = "/shop_status_cnt")
     public Map<String,Object> ShopActionStatusList(
             @RequestParam(value = "start_time",required = false)String start_time,
             @RequestParam(value = "end_time",required = false)String end_time)throws  Exception{

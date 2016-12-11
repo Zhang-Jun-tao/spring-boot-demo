@@ -19,7 +19,7 @@ public class TestController {
     @Autowired
     private ITestService testService;
 
-    @RequestMapping(value = "list",method = RequestMethod.GET)
+    @GetMapping(value = "list")
     public List<TestPOJO> test(@RequestParam(value = "age",required = true)Integer age){
         Assert.notNull(age,"age is empty");
         return testService.get(age);
