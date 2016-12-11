@@ -20,6 +20,7 @@ spring:
     maxOpenPreparedStatements: 20
 
 
+
 #jdbc.mysql.driverClassName=com.mysql.jdbc.Driver
 #jdbc.mysql.url=jdbc:mysql://123.57.29.101:3306/yx?characterEncoding=utf8
 #jdbc.mysql.url=jdbc:mysql://123.57.29.101:3306/yx?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
@@ -48,6 +49,7 @@ logging:
     sample.mybatis.mapper: TRACE
     org.springframework.web.method.annotation: DEBUG
     com.yx.statistics: DEBUG
+
 
 
 
