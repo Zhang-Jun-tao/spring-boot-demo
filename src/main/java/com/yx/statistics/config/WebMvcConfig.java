@@ -1,12 +1,14 @@
 package com.yx.statistics.config;
 
 import com.yx.statistics.common.ApplicationContext;
+import com.yx.statistics.common.MyInterceptor;
 import com.yx.statistics.common.StartProjectInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -56,6 +58,17 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     	ApplicationContext.runEnv=springProfile;
     	return springProfile;
     }
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// 多个拦截器组成一个拦截器链
+		// addPathPatterns 用于添加拦截规则
+		// excludePathPatterns 用户排除拦截
+		registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
+		//registry.addInterceptor(new MyInterceptor2()).addPathPatterns("/**");
+		super.addInterceptors(registry);
+	}
+
 
 
 	@Bean
